@@ -1,0 +1,32 @@
+﻿{
+  "PackageFormatVersion": "1.0",
+  "Assembly": "Albuschat.LogicNodes.WebRequest.dll",
+  "DependentFiles": [
+    "LogicModule.Nodes.Helpers.dll"
+  ],
+  "Version": "1.5.35",
+  "ReleaseNotes": null,
+  "Author": "Daniel Albuschat",
+  "Copyright": "© Daniel Albuschat, 2018",
+  "DeveloperId": "",
+  "Licence": "perProject",
+  "PackageId": "{DE776FFA-83AB-4421-AB3B-09DF46434AB3}",
+  "Nodes": [
+    {
+      "Type": "Albuschat.LogicNodes.WebRequest.WebRequestNode",
+      "Name": {
+        "en": "Web Request",
+        "de": "Web Request"
+      },
+      "IsConverter": false,
+      "Category": "Node",
+      "DefaultIcon": "icons/Albuschat.LogicNodes.WebRequest.png",
+      "HelpTooltip": {
+        "en": "Make an arbitrary web request",
+        "de": "Setzt einen beliebigen Web Request ab."
+      },
+      "HelpFileReference": "@",
+      "Tags": []
+    }
+  ]
+}

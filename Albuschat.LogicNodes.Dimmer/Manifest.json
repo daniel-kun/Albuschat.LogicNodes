@@ -1,0 +1,32 @@
+﻿{
+  "PackageFormatVersion": "1.0",
+  "Assembly": "Albuschat.LogicNodes.Dimmer.dll",
+  "DependentFiles": [
+    "LogicModule.Nodes.Helpers.dll"
+  ],
+  "Version": "1.0.42",
+  "ReleaseNotes": null,
+  "Author": "Daniel Albuschat",
+  "Copyright": "© Daniel Albuschat, 2018",
+  "DeveloperId": "",
+  "Licence": "perProject",
+  "PackageId": "{DE776FFA-83AB-4421-AB3B-09DF46434AB3}",
+  "Nodes": [
+    {
+      "Type": "Albuschat.LogicNodes.Dimmer.DimmerNode",
+      "Name": {
+        "en": "Toggle and dim with binary input",
+        "de": "Umschalten und Dimmen per Binäreingang"
+      },
+      "IsConverter": false,
+      "Category": "Node",
+      "DefaultIcon": "icons/Albuschat.LogicNodes.Dimmer.png",
+      "HelpTooltip": {
+        "en": "Lets you toggle and dim light using binary inputs.",
+        "de": "Erlaubt es, Licht mit Hilfe von Binäreingängen umzuschalten und zu dimmen."
+      },
+      "HelpFileReference": "@",
+      "Tags": []
+    }
+  ]
+}

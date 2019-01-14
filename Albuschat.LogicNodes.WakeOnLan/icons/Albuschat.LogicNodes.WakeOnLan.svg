@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="Albuschat.LogicNodes.WakeOnLan.svg"
+   inkscape:export-filename="C:\Projects\Albuschat.LogicNodes\Albuschat.LogicNodes.WakeOnLan\icons\Albuschat.LogicNodes.WakeOnLan.png"
+   inkscape:export-xdpi="88"
+   inkscape:export-ydpi="88"
+   inkscape:version="0.92.1 r15371">
+  <title
+     id="title5180">Albuschat.LogicNodes.WakeOnLan</title>
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.313708"
+     inkscape:cx="14.232076"
+     inkscape:cy="17.933772"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Albuschat.LogicNodes.WakeOnLan</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-284.3)">
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20669128;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 12.683464,295.08177 9.7730467,297 h 2.9104173 z"
+       id="rect4561"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.20669128;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -0.01653669,295.08177 2.89388,297 h -2.91041669 z"
+       id="rect4561-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.39687499;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4585"
+       width="12.733073"
+       height="1.0583333"
+       x="-0.016536543"
+       y="-297"
+       transform="scale(1,-1)" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.58208333;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path5184"
+       cx="6.3499999"
+       cy="290.64999"
+       r="3.5428531" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.58208333;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 6.35,290.65 1.1244792,-1.38906"
+       id="path5263"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.58208334;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1.624515,289.11507 c 0.5942791,-1.58599 1.6102377,-2.62627 3.1470949,-3.02164"
+       id="path5265"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.58208334;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 11.076152,289.11507 C 10.481873,287.52908 9.4659144,286.4888 7.929057,286.09343"
+       id="path5265-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

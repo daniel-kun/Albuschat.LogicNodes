@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albuschat.LogicNodes.WebRequest", "Albuschat.LogicNodes.WebRequest\Albuschat.LogicNodes.WebRequest.csproj", "{EDBEA77A-B56C-4A17-8BEA-87197D502B8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albuschat.LogicNodes.Network.Tests", "Albuschat.LogicNodes.Network.Tests\Albuschat.LogicNodes.Network.Tests.csproj", "{E2ECF7F8-3FFE-420C-8FC9-A305B190D7A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoL", "WoL\WoL.csproj", "{085215E3-3140-41AE-8752-74E9F81CACC2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EDBEA77A-B56C-4A17-8BEA-87197D502B8C} = {EDBEA77A-B56C-4A17-8BEA-87197D502B8C}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{329D09C2-D897-4E10-B5BA-96D935D4F6B4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		PostBuild.cmd = PostBuild.cmd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albuschat.LogicNodes.WakeOnLan", "Albuschat.LogicNodes.WakeOnLan\Albuschat.LogicNodes.WakeOnLan.csproj", "{FDD39DF2-9C64-4EE7-AE29-15FDAB78E593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albuschat.LogicNodes.Dimmer", "Albuschat.LogicNodes.Dimmer\Albuschat.LogicNodes.Dimmer.csproj", "{4476F3EF-AEB7-400F-9927-D68DCDB67AEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albuschat.LogicNodes.Dimmer.Tests", "Albuschat.LogicNodes.Dimmer.Tests\Albuschat.LogicNodes.Dimmer.Tests.csproj", "{1486997C-B8F9-408C-9D8D-E4981CF1754D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDBEA77A-B56C-4A17-8BEA-87197D502B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBEA77A-B56C-4A17-8BEA-87197D502B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBEA77A-B56C-4A17-8BEA-87197D502B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBEA77A-B56C-4A17-8BEA-87197D502B8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2ECF7F8-3FFE-420C-8FC9-A305B190D7A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2ECF7F8-3FFE-420C-8FC9-A305B190D7A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2ECF7F8-3FFE-420C-8FC9-A305B190D7A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2ECF7F8-3FFE-420C-8FC9-A305B190D7A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{085215E3-3140-41AE-8752-74E9F81CACC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{085215E3-3140-41AE-8752-74E9F81CACC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{085215E3-3140-41AE-8752-74E9F81CACC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{085215E3-3140-41AE-8752-74E9F81CACC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD39DF2-9C64-4EE7-AE29-15FDAB78E593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD39DF2-9C64-4EE7-AE29-15FDAB78E593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD39DF2-9C64-4EE7-AE29-15FDAB78E593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD39DF2-9C64-4EE7-AE29-15FDAB78E593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4476F3EF-AEB7-400F-9927-D68DCDB67AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4476F3EF-AEB7-400F-9927-D68DCDB67AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4476F3EF-AEB7-400F-9927-D68DCDB67AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4476F3EF-AEB7-400F-9927-D68DCDB67AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1486997C-B8F9-408C-9D8D-E4981CF1754D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1486997C-B8F9-408C-9D8D-E4981CF1754D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1486997C-B8F9-408C-9D8D-E4981CF1754D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1486997C-B8F9-408C-9D8D-E4981CF1754D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F7729B8-4658-41DF-AE5F-780EB04C05C8}
+	EndGlobalSection
+EndGlobal
