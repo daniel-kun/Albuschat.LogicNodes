@@ -95,23 +95,25 @@ namespace Albuschat.LogicNodes.WakeOnLan
             if (ParseMacAddress(macAddress, out mac))
             {
                 // WOL packet is sent over UDP 255.255.255.0:40000.
-                UdpClient client = new UdpClient();
-                client.Connect(targetIP, 40000);
+                using (UdpClient client = new UdpClient())
+                {
+                    client.Connect(targetIP, 40000);
 
-                // WOL packet contains a 6-bytes trailer and 16 times a 6-bytes sequence containing the MAC address.
-                byte[] packet = new byte[17 * 6];
+                    // WOL packet contains a 6-bytes trailer and 16 times a 6-bytes sequence containing the MAC address.
+                    byte[] packet = new byte[17 * 6];
 
-                // Trailer of 6 times 0xFF.
-                for (int i = 0; i < 6; i++)
-                    packet[i] = 0xFF;
+                    // Trailer of 6 times 0xFF.
+                    for (int i = 0; i < 6; i++)
+                        packet[i] = 0xFF;
 
-                // Body of magic packet contains 16 times the MAC address.
-                for (int i = 1; i <= 16; i++)
-                    for (int j = 0; j < 6; j++)
-                        packet[i * 6 + j] = mac[j];
+                    // Body of magic packet contains 16 times the MAC address.
+                    for (int i = 1; i <= 16; i++)
+                        for (int j = 0; j < 6; j++)
+                            packet[i * 6 + j] = mac[j];
 
-                // Send WOL packet.
-                client.Send(packet, packet.Length);
+                    // Send WOL packet.
+                    client.Send(packet, packet.Length);
+                }
             }
         }
 
