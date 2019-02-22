@@ -242,6 +242,24 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
         }
 
         [Test]
+        public void When_UsernameAndPasswordAreGivenInBasicAuthHeader_Should_SendAuthHeadersToServer()
+        {
+            // Arrange: New node with echo URL
+            var node = new WebRequestNode(TestNodeContext.Create());
+            node.URL.Value = "http://localhost:12345/foo";
+            // Act: Set Trigger and Execute:
+            node.HeaderMode.Value = "HeaderMode.3";
+            node.Headers[0].Value = "Cache-Control: no-cache";
+            node.Headers[1].Value = "X-Dummy: Foobar";
+            node.Headers[2].Value = $"Authorization: Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes("daniel:albuschat"))}";
+            node.Trigger.Value = true;
+            node.Execute();
+            Assert.AreEqual("no-cache", lastRequest.Headers.Get("Cache-Control"));
+            Assert.AreEqual("Basic ZGFuaWVsOmFsYnVzY2hhdA==", lastRequest.Headers.Get("Authorization"));
+            Assert.AreEqual("Foobar", lastRequest.Headers.Get("X-Dummy"));
+        }
+
+        [Test]
         public void When_ContentTypeIsNotSet_Should_NotSendContentTypeToServer()
         {
             // Arrange: New node with echo URL
