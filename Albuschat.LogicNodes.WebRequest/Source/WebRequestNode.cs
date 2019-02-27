@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Albuschat.LogicNodes.WebRequest
 {
@@ -163,6 +164,8 @@ namespace Albuschat.LogicNodes.WebRequest
         }
 
         private ITypeService TypeService;
+        public Action _BeforeExecute;
+        public Action _AfterExecute;
 
         /// <summary>
         /// A trigger used to execute the web request.
@@ -232,6 +235,11 @@ namespace Albuschat.LogicNodes.WebRequest
         /// </summary>
         public override void Execute()
         {
+            ExecuteImpl();
+        }
+
+        public void ExecuteImpl()
+        {
             if (Trigger.HasValue && Trigger.Value == true && Trigger.WasSet)
             {
                 string TranslateContentType(string contentTypeRaw)
@@ -249,29 +257,33 @@ namespace Albuschat.LogicNodes.WebRequest
                 string contentType = ContentType != null ? (ContentType.HasValue ? TranslateContentType(ContentType.Value) : null) : null;
                 Dictionary<string, string> variables = BuildDictionaryFromVariables(this.Variables);
             
-                ExecuteImpl(
-                    Method.HasValue ? Method.Value : null,
-                    URL.HasValue ? URL.Value : null,
-                    Headers.Select(e => e.HasValue ? e.Value : throw new Exception("Did not expect a NULL header")),
-                    contentType,
-                    body,
-                    variables,
-                    (errorCode, errorMessage, response) =>
-                    {
-                        if (errorCode != null)
+                var thread = new Thread(() => {
+                    _BeforeExecute();
+                    ExecuteWebRequest(
+                        Method.HasValue ? Method.Value : null,
+                        URL.HasValue ? URL.Value : null,
+                        Headers.Select(e => e.HasValue ? e.Value : throw new Exception("Did not expect a NULL header")),
+                        contentType,
+                        body,
+                        variables,
+                        (errorCode, errorMessage, response) =>
                         {
-                            ErrorCode.Value = errorCode.Value;
-                        }
-                        if (errorMessage != null)
-                        {
-                            ErrorMessage.Value = errorMessage;
-                        }
-                        if (response != null)
-                        {
-                            Response.Value = response;
-                        }
-                    }
-                    );
+                            if (errorCode != null)
+                            {
+                                ErrorCode.Value = errorCode.Value;
+                            }
+                            if (errorMessage != null)
+                            {
+                                ErrorMessage.Value = errorMessage;
+                            }
+                            if (response != null)
+                            {
+                                Response.Value = response;
+                            }
+                            _AfterExecute();
+                        });
+                    });
+                thread.Start();
             }
         }
 
@@ -285,7 +297,7 @@ namespace Albuschat.LogicNodes.WebRequest
             return result;
         }
 
-        public static void ExecuteImpl(string Method, string URL, IEnumerable<string> Headers, string ContentType, string Body, Dictionary<string, string> Variables, Action<int?, string, string> SetResultCallback)
+        public static void ExecuteWebRequest(string Method, string URL, IEnumerable<string> Headers, string ContentType, string Body, Dictionary<string, string> Variables, Action<int?, string, string> SetResultCallback)
         {
             if (URL != null)
             {

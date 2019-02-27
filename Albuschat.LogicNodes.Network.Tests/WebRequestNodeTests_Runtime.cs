@@ -73,7 +73,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.URL.Value = "http://localhost:12345/";
             // Act: Set Trigger and Execute:
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must include the expected Response
             Assert.AreEqual(dummyResponse, node.Response.Value);
             Assert.AreEqual("GET", lastRequest.HttpMethod);
@@ -85,7 +85,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             // Arrange: New (invalid) node
             var node = new WebRequestNode(TestNodeContext.Create());
             node.Trigger.Value = true;
-            node.Execute(); // Should emit error, since no URL is set
+            node.ExecuteAndWait(200); // Should emit error, since no URL is set
             node.URL.Value = "http://localhost:12345/";
             node.ErrorCode.ValueSet += (object sender, ValueChangedEventArgs e) =>
             {
@@ -102,7 +102,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             // Warning! This simulates the behaviour of the Logic Engine:
             node.Trigger.WasSet = false;
             // Act: Set proper URL and execute again:
-            node.Execute();
+            node.ExecuteAndWait(200);
             // Assert: Most has been asserted in the callbacks above, additionally assert that all Outputs must not be set:
             Assert.IsFalse(node.Response.HasValue);
             Assert.IsFalse(node.ErrorCode.HasValue);
@@ -124,7 +124,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.HeaderMode.Value = "HeaderMode.2";
             node.Headers[0].Value = "Accept: text/html";
             node.Headers[1].Value = "Connection: Upgrade";
-            node.Execute();
+            node.ExecuteAndWait(200);
             // Assert: Must not have a Response, ErrorCode or ErrorMessage
             Assert.IsFalse(node.Response.HasValue);
             Assert.IsFalse(node.ErrorCode.HasValue);
@@ -141,7 +141,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Method.Value = "POST";
             node.Body.Value = "{value: 1}";
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must include the expected Response
             Assert.AreEqual("{value: 1}", node.Response.Value);
             Assert.AreEqual("POST", lastRequest.HttpMethod);
@@ -158,7 +158,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Body.Value = "{value: \"{Variable1}\"}";
             node.Variables[0].Value = "dummy";
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must include the expected Response
             Assert.AreEqual("{value: \"dummy\"}", node.Response.Value);
             Assert.AreEqual("/dummy/echo", lastRequest.RawUrl);
@@ -188,7 +188,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Headers[6].Value = "Referer: gira.de";
             node.Headers[7].Value = "User-Agent: Gira";
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must include the expected Response
             Assert.AreEqual("text/html", lastRequest.Headers.Get("Accept"));
             Assert.AreEqual("Upgrade", lastRequest.Headers.Get("Connection"));
@@ -217,7 +217,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             string uid = Guid.NewGuid().ToString();
             node.Body.Value = uid;
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             //Assert: Response contains the sent guid.
             Assert.AreEqual(uid, node.Response.Value);
         }
@@ -234,7 +234,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Headers[1].Value = "Authorization: Bearer ASDF";
             node.Headers[2].Value = "X-Dummy: Foobar";
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must include the expected Response
             Assert.AreEqual("no-cache", lastRequest.Headers.Get("Cache-Control"));
             Assert.AreEqual("Bearer ASDF", lastRequest.Headers.Get("Authorization"));
@@ -269,7 +269,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.ContentType.Value = "ContentType.Empty";
             // Act: Set Trigger and Execute:
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must not include Content-Type
             Assert.IsNull(lastRequest.Headers.Get("Content-Type"));
         }
@@ -284,7 +284,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.ContentType.Value = "application/json";
             // Act: Set Trigger and Execute:
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must include Content-Type
             Assert.AreEqual("application/json", lastRequest.Headers.Get("Content-Type"));
         }
@@ -301,7 +301,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Headers[0].Value = "Content-Type: application/xml";
             // Act: Set Trigger and Execute:
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must use the Content-Type from the ContentType Input and not the custom header
             Assert.AreEqual("application/json", lastRequest.Headers.Get("Content-Type"));
         }
@@ -317,7 +317,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Headers[0].Value = "Content-Type: application/xml";
             // Act: Set Trigger and Execute:
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             // Assert: Must not send Content-Type, since this is disallowed via custom Header.
             Assert.IsNull(lastRequest.Headers.Get("Content-Type"));
         }

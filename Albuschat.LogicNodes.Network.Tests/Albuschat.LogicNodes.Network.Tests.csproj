@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebRequestNodeTestHelpers.cs" />
     <Compile Include="WebRequestNodeTests_ContentType.cs" />
     <Compile Include="WebRequestNodeTests_Outputs.cs" />
     <Compile Include="WebRequestNodeTests_HeaderMode.cs" />
