@@ -258,7 +258,7 @@ namespace Albuschat.LogicNodes.WebRequest
                 Dictionary<string, string> variables = BuildDictionaryFromVariables(this.Variables);
             
                 var thread = new Thread(() => {
-                    _BeforeExecute();
+                    _BeforeExecute?.Invoke();
                     ExecuteWebRequest(
                         Method.HasValue ? Method.Value : null,
                         URL.HasValue ? URL.Value : null,
@@ -280,7 +280,7 @@ namespace Albuschat.LogicNodes.WebRequest
                             {
                                 Response.Value = response;
                             }
-                            _AfterExecute();
+                            _AfterExecute?.Invoke();
                         });
                     });
                 thread.Start();

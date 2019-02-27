@@ -4,7 +4,7 @@
   "DependentFiles": [
     "LogicModule.Nodes.Helpers.dll"
   ],
-  "Version": "2.0.1",
+  "Version": "2.0.2",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat, 2018",
