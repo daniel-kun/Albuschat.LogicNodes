@@ -28,6 +28,17 @@ namespace Albuschat.LogicNodes.WebRequest
             this.Method = this.TypeService.CreateEnum("HttpMethodType", "Method", new string[] {
                 "GET", "POST", "HEAD", "PUT", "DELETE", "CONNECT", "OPTIONS", "PATCH"
             }, "GET");
+            this.AuthType = this.TypeService.CreateEnum(
+                "HttpAuthType",
+                "AuthType", 
+                new string[]
+                {
+                    AuthCredentials.AuthType.None.ToString(),
+                    AuthCredentials.AuthType.BasicAuth.ToString(),
+                    AuthCredentials.AuthType.BearerToken.ToString()
+                },
+                AuthCredentials.AuthType.None.ToString());
+            this.AuthType.ValueSet += AuthType_ValueSet;
             this.Method.ValueSet += UpdateBodyAndContentTypeInputVisibility;
             this.ContentType = null;
             this.Body = null;
@@ -52,7 +63,30 @@ namespace Albuschat.LogicNodes.WebRequest
             this.ErrorCode = this.TypeService.CreateInt(PortTypes.Integer, "ErrorCode");
             this.ErrorMessage = this.TypeService.CreateString(PortTypes.String, "ErrorMessage");
         }
-        
+
+        private void AuthType_ValueSet(object sender, ValueChangedEventArgs e)
+        {
+            var newValue = (string)e.NewValue;
+            if (newValue != null && newValue == AuthCredentials.AuthType.BasicAuth.ToString())
+            {
+                this.AuthToken = null;
+                this.AuthUserName = this.TypeService.CreateString(PortTypes.String, "AuthUserName");
+                this.AuthPassword = this.TypeService.CreateString(PortTypes.String, "AuthPassword");
+            }
+            else if (newValue != null && newValue == AuthCredentials.AuthType.BearerToken.ToString())
+            {
+                this.AuthToken = this.TypeService.CreateString(PortTypes.String, "AuthToken");
+                this.AuthUserName = null;
+                this.AuthPassword = null;
+            }
+            else
+            {
+                this.AuthToken = null;
+                this.AuthUserName = null;
+                this.AuthPassword = null;
+            }
+        }
+
         private class MatchEqualityComparer : IEqualityComparer<Match>
         {
             public bool Equals(Match x, Match y)
@@ -187,6 +221,31 @@ namespace Albuschat.LogicNodes.WebRequest
         public EnumValueObject Method { get; private set; }
 
         /// <summary>
+        /// Specifies the Authorization type to use, if any.
+        /// </summary>
+        [Parameter]
+        public EnumValueObject AuthType { get; private set; }
+
+        /// <summary>
+        /// Specifies the Bearer Token when AuthType = BearerToken.
+        /// </summary>
+        [Input(IsInput = false, IsDefaultShown = true)]
+        public StringValueObject AuthToken { get; private set; }
+
+        /// <summary>
+        /// Specifies the User Name when AuthType = BasicAuth.
+        /// </summary>
+        [Input(IsInput = false, IsDefaultShown = true)]
+        public StringValueObject AuthUserName { get; private set; }
+
+        /// <summary>
+        /// Specifies the Password when AuthType = BasicAuth.
+        /// </summary>
+        [Input(IsInput = false, IsDefaultShown = true)]
+        public StringValueObject AuthPassword { get; private set; }
+
+
+        /// <summary>
         /// The content type of the request.
         /// </summary>
         [Parameter]
@@ -262,6 +321,7 @@ namespace Albuschat.LogicNodes.WebRequest
                     ExecuteWebRequest(
                         Method.HasValue ? Method.Value : null,
                         URL.HasValue ? URL.Value : null,
+                        AuthCredentials.FromNodeParameters(AuthType, AuthToken, AuthUserName, AuthPassword),
                         Headers.Select(e => e.HasValue ? e.Value : throw new Exception("Did not expect a NULL header")),
                         contentType,
                         body,
@@ -297,7 +357,7 @@ namespace Albuschat.LogicNodes.WebRequest
             return result;
         }
 
-        public static void ExecuteWebRequest(string Method, string URL, IEnumerable<string> Headers, string ContentType, string Body, Dictionary<string, string> Variables, Action<int?, string, string> SetResultCallback)
+        public static void ExecuteWebRequest(string Method, string URL, AuthCredentials Auth, IEnumerable<string> Headers, string ContentType, string Body, Dictionary<string, string> Variables, Action<int?, string, string> SetResultCallback)
         {
             if (URL != null)
             {
@@ -367,6 +427,7 @@ namespace Albuschat.LogicNodes.WebRequest
                     }
 
                     HttpWebRequest client = (HttpWebRequest)HttpWebRequest.Create(uri);
+                    Auth.ApplyTo(client);
                 
                     Console.WriteLine($"Making web request {uri}");
                     foreach (var header in Headers)
