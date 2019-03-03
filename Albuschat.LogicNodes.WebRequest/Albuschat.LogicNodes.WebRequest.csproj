@@ -57,6 +57,7 @@
     <None Include="Manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help\de\Albuschat.LogicNodes.WebRequest.html">

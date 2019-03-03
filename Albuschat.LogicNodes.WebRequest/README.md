@@ -16,7 +16,6 @@ unter Anderem:
 - IFTTT (https://ifttt.com/services/maker_webhooks)
 - Nuki (https://nuki.io/de/api/)
 - Phillips Hue (https://www.developers.meethue.com/documentation/getting-started, benötigt vorher eine Registrierung)
-- Sonos (https://developer.sonos.com/reference/)
 - Diverse netzwerkfähige Fernseher, Beamer und HiFi-Verstärker
 
 Auch "Smart Home Gateways" können damit angesteurt werden, wodurch
@@ -43,7 +42,11 @@ Es gibt ein paar Dinge, die mit diesem Baustein nicht möglich sind:
 |-------------|---------|--------------|
 | Trigger | Binary | Trigger muss auf '1' gesetzt werden, um die Webanfrage gemäß der folgenden Inputs abzusenden. *Wichtig:*  Die Anfrage wird *nur* durch Setzen des Triggers auf '1' ausgelöst und nicht durch die Veränderungen einer oder mehrerer der anderen Inputs. |
 | URL | String| Die URL, die abgerufen werden soll. Muss mit http:// beginnen. Die URL kann beliebig viele Variablen beinhalten, siehe Beschreibung der Inputs <Variable>. |
-| Methode | HTTP Methode |Die Abfrage-Methode, die verwendet werden soll. Bei der Methode 'GET' wird die URL genau so abgerufen, wie es ein Browser machen würde, wenn man die URL in der Adresszeile eingibt. Benutzen Sie 'GET' beispielsweise, um normale Webseiteninhalte abzurufen. Andere häufig verwendete Methoden sind 'POST', 'PUT' und 'DELETE'. Welche Methode zu verwenden ist, entnehmen Sie der Spezifikation der API, die Sie ansprechen. |
+| Methode | HTTP Methode | Die Abfrage-Methode, die verwendet werden soll. Bei der Methode 'GET' wird die URL genau so abgerufen, wie es ein Browser machen würde, wenn man die URL in der Adresszeile eingibt. Benutzen Sie 'GET' beispielsweise, um normale Webseiteninhalte abzurufen. Andere häufig verwendete Methoden sind 'POST', 'PUT' und 'DELETE'. Welche Methode zu verwenden ist, entnehmen Sie der Spezifikation der API, die Sie ansprechen. |
+| Authorization | HTTP Authorization-Methode | Gibt an, ob eine Authorisierungs-Methode bei der Abfrage genutzt werden soll, und falls ja, welche. Es stehen Basic Authorization und Bearer Token zur Auswahl. Spezieller Authorization-Methoden können stattdessen als benutzerdefinierter Header verwendet werden. |
+| Benutzername | String | Der Benutzername, mit dem sich an der Gegenstelle per HTTP Basic Authorization angemeldet werden soll. Nur sichtbar, wenn Authorization auf "Basic Auth" gestellt wurde. |
+| Passwort | String | Das Passwort passend zum Benutzernamen, mit dem sich an der Gegenstelle per HTTP Basic Authorization angemeldet werden soll. Nur sichtbar, wenn Authorization auf "Basic Auth" gestellt wurde. |
+| Token | String | Der Authorization Bearer Token, mit dem sich an der Gegenstelle angemeldet werden soll. Nur sichtbar, wenn Authorization auf "Bearer Token" gestellt wurde. |
 | Content-Type | Content Type | Nur sichtbar, wenn die Methode nicht 'GET' ist. Gibt an, in welchem Format der Inhalt der Abfrage im Body angegeben wird. Welcher Content-Type zu verwenden ist, und wie der Body formatiert werden muss, entnehmen Sie bitte der Spezifikation der API, die Sie ansprechen. |
 | Body| String | Nur sichtbar, wenn die Methode nicht 'GET' ist. Enthält den Inhalt der Anfrage, die an den Server gesendet werden soll. Der Inhalt muss entsprechend dem gewählten Content-Type formatiert sein. Siehe Liste der Content-Types weiter unten. Wie der Inhalt des Body gestaltet werden muss, entnehmen Sie bitte der Spezifikation der API, die Sie ansprechen. Der Body kann beliebig viele Variablen beinhalten, siehe Beschreibung der Inputs <Variable>. |
 | \<Variablen\> | String |In der URL und dem Body können Variablen verwendet werden, die mit geschweiften Klammern gekennzeichnet werden. z.B. {Variable1}. Variablen dürfen nur Buchstaben und Ziffern beinhalten und müssen mit einem Buchstaben beginnen. Für jede Variable wird ein neuer Input erzeugt. Beim Ausführen des Web Request per Trigger werden in der URL und dem Body alle Vorkomnisse einer Variablen durch den Inhalt des jeweiligen Inputs ersetzt. Variablen können in URL und Body mehrfach verwendet werden. Es entsteht dann ein Input, dessen Wert bei allen Vorkomnissen der Variable eingesetzt wird. |
