@@ -71,7 +71,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             // Arrange: New node with simple URL
             var node = new WebRequestNode(TestNodeContext.Create());
             // Act: Set AuthType to BasicAuth
-            node.AuthType.Value = AuthCredentials.AuthType.None.ToString();
+            node.AuthType.Value = AuthCredentials.AuthType.NoAuth.ToString();
             // Assert:
             Assert.IsNull(node.AuthToken);
             Assert.IsNull(node.AuthPassword);
@@ -114,7 +114,7 @@ namespace Albuschat.LogicNodes.WebRequest.Tests
             node.Trigger.Value = true;
             node.ExecuteAndWait();
             // Assert: Must include the expected Response
-            Assert.AreEqual(AuthCredentials.AuthType.None.ToString(), node.AuthType.Value);
+            Assert.AreEqual(AuthCredentials.AuthType.NoAuth.ToString(), node.AuthType.Value);
             Assert.IsNull(lastRequest.Headers.Get("Authorization"));
         }
 

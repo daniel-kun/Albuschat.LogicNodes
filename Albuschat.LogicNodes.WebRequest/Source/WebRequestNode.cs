@@ -33,11 +33,11 @@ namespace Albuschat.LogicNodes.WebRequest
                 "AuthType", 
                 new string[]
                 {
-                    AuthCredentials.AuthType.None.ToString(),
+                    AuthCredentials.AuthType.NoAuth.ToString(),
                     AuthCredentials.AuthType.BasicAuth.ToString(),
                     AuthCredentials.AuthType.BearerToken.ToString()
                 },
-                AuthCredentials.AuthType.None.ToString());
+                AuthCredentials.AuthType.NoAuth.ToString());
             this.AuthType.ValueSet += AuthType_ValueSet;
             this.Method.ValueSet += UpdateBodyAndContentTypeInputVisibility;
             this.ContentType = null;
@@ -526,6 +526,13 @@ namespace Albuschat.LogicNodes.WebRequest
                 { "de", new Dictionary<string, string>
                     {
                         { "Method", "Methode" },
+                        { "AuthType", "Authorization" },
+                        { "NoAuth", "(keine)" },
+                        { "BasicAuth", "Basic Auth" },
+                        { "BearerToken", "Bearer Token" },
+                        { "AuthToken", "Token" },
+                        { "AuthUserName", "Benutzername" },
+                        { "AuthPassword", "Passwort" },
                         { "HeaderMode", "Eigene Header setzen" },
                         { "HeaderMode.0", "Keine" },
                         { "HeaderMode.1", "Anzahl eigener Header: 1" },
@@ -558,6 +565,13 @@ namespace Albuschat.LogicNodes.WebRequest
                 { "en", new Dictionary<string, string>
                     {
                         { "Method", "Method" },
+                        { "AuthType", "Authorization" },
+                        { "NoAuth", "(none)" },
+                        { "BasicAuth", "Basic Auth" },
+                        { "BearerToken", "Bearer Token" },
+                        { "AuthToken", "Token" },
+                        { "AuthUserName", "Username" },
+                        { "AuthPassword", "Password" },
                         { "HeaderMode", "Custom headers" },
                         { "HeaderMode.0", "No custom headers" },
                         { "HeaderMode.1", "Number of custom headers: 1" },

@@ -33,14 +33,14 @@ namespace Albuschat.LogicNodes.WebRequest
             {
                 return new AuthCredentials
                 {
-                    Type = AuthType.None
+                    Type = AuthType.NoAuth
                 };
             }
         }
 
         public enum AuthType
         {
-            None,
+            NoAuth,
             BasicAuth,
             BearerToken
         };
