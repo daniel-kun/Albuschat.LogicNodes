@@ -1,4 +1,4 @@
-﻿using Albuschat.LogicNodes.WakeOnLan;
+﻿using Albuschat.LogicNodes.WakeOnLan.Source;
 using System;
 
 namespace WoL
@@ -12,7 +12,7 @@ namespace WoL
         {
             if (args.Length == 1)
             {
-                WakeOnLanNode.WakeOnLan(args[0]);
+                WakeOnLanImpl.WakeOnLan(args[0]);
             }
             else
             {
