@@ -3,6 +3,7 @@ using LogicModule.ObjectModel;
 using LogicModule.ObjectModel.TypeSystem;
 using System.Net;
 using Albuschat.LogicNodes.WakeOnLan.Source;
+using System.Collections.Generic;
 
 namespace Albuschat.LogicNodes.WakeOnLan
 {
@@ -70,7 +71,33 @@ namespace Albuschat.LogicNodes.WakeOnLan
         /// <returns>The translation of <paramref name="key"/> in the requested language, or <paramref name="key"/> if the translation is missing.</returns>
         public override string Localize(string language, string key)
         {
-            return base.Localize(language, key);
+            var translations = new Dictionary<string, Dictionary<string, string>>
+            {
+                { "de", new Dictionary<string, string>
+                    {
+                        { "Trigger", "Trigger" },
+                        { "MacAddress", "MAC-Adresse" },
+                    }
+                },
+                { "en", new Dictionary<string, string>
+                    {
+                        { "Trigger", "Trigger" },
+                        { "MacAddress", "MAC address" },
+                    }
+                }
+            };
+            if (translations.ContainsKey(language) && translations[language].ContainsKey(key))
+            {
+                return translations[language][key];
+            }
+            else if (translations["en"].ContainsKey(key))
+            {
+                return translations["en"][key];
+            }
+            else
+            {
+                return key;
+            }
         }
     }
 }
