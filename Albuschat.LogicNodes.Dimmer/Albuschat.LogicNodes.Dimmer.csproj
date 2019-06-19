@@ -54,9 +54,14 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Help\common\ModeExplanation-All.png" />
+    <Content Include="Help\common\ModeExplanation-Mode1.png" />
+    <Content Include="Help\common\ModeExplanation-Mode2.png" />
+    <Content Include="Help\common\ModeExplanation-Mode3.png" />
     <Content Include="Help\de\Albuschat.LogicNodes.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Help\de\ModeExplanation-All.png" />
     <Content Include="Help\en\Albuschat.LogicNodes.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

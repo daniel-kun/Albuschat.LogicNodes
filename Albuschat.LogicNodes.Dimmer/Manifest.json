@@ -2,12 +2,13 @@
   "PackageFormatVersion": "1.0",
   "Assembly": "Albuschat.LogicNodes.Dimmer.dll",
   "DependentFiles": [
-    "LogicModule.Nodes.Helpers.dll"
+    "LogicModule.Nodes.Helpers.dll",
+	"Help\\common\\ModeExplanation-All.png"
   ],
-  "Version": "1.0.42",
+  "Version": "1.0.43",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
-  "Copyright": "© Daniel Albuschat, 2018",
+  "Copyright": "© Daniel Albuschat, 2018 - 2019",
   "DeveloperId": "",
   "Licence": "perProject",
   "PackageId": "{DE776FFA-83AB-4421-AB3B-09DF46434AB3}",
