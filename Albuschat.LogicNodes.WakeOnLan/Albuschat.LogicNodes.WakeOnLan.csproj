@@ -53,7 +53,7 @@
     <Compile Include="Source\WakeOnLanNode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\de\Albuschat.LogicNodes.WakeOnLank.html">
+    <Content Include="Help\de\Albuschat.LogicNodes.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Help\en\Albuschat.LogicNodes.WakeOnLan.html">
@@ -79,6 +79,7 @@
     <None Include="Manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
