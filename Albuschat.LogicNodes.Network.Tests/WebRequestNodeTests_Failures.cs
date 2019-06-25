@@ -8,7 +8,7 @@ using Unosquare.Labs.EmbedIO;
 using Unosquare.Labs.EmbedIO.Modules;
 using Unosquare.Net;
 
-namespace Albuschat.LogicNodes.WebRequest.Tests
+namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
 {
     [TestFixture]
     public class WebRequestNodeTests_Failures

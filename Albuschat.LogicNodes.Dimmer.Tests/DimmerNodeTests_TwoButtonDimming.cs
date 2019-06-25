@@ -4,7 +4,7 @@ using LogicModule.ObjectModel.TypeSystem;
 using NUnit.Framework;
 using System;
 
-namespace Albuschat.LogicNodes.Dimmer.Tests
+namespace d_albuschat_gmail_com.logic.Nodes.Dimmer.Tests
 {
     internal class MockSchedulerService : ISchedulerService
     {

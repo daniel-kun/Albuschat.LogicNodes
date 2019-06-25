@@ -3,7 +3,7 @@ using System.Net;
 using System.Text;
 using LogicModule.ObjectModel.TypeSystem;
 
-namespace Albuschat.LogicNodes.WebRequest
+namespace d_albuschat_gmail_com.logic.Nodes.WebRequest
 {
     public class AuthCredentials
     {

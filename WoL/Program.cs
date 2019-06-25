@@ -1,4 +1,4 @@
-﻿using Albuschat.LogicNodes.WakeOnLan.Source;
+﻿using d_albuschat_gmail_com.LogicNodes.WakeOnLan.Source;
 using System;
 
 namespace WoL

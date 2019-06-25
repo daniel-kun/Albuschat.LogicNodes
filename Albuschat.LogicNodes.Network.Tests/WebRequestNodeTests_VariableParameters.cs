@@ -1,7 +1,7 @@
 ﻿using LogicModule.Nodes.TestHelper;
 using NUnit.Framework;
 
-namespace Albuschat.LogicNodes.WebRequest.Tests
+namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
 {
     [TestFixture]
     public class WebRequestNodeTests_VariableParameters
