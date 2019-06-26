@@ -1,7 +1,6 @@
-﻿using d_albuschat_gmail_com.LogicNodes.WebRequest;
-using System.Threading;
+﻿using System.Threading;
 
-namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
+namespace d_albuschat_gmail_com.logic.Nodes.WebRequest.Tests
 {
     public static class WebRequestNodeTestHelpers
     {

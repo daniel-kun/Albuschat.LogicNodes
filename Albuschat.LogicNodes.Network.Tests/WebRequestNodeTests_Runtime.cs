@@ -10,7 +10,7 @@ using Unosquare.Labs.EmbedIO;
 using Unosquare.Labs.EmbedIO.Modules;
 using Unosquare.Net;
 
-namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
+namespace d_albuschat_gmail_com.logic.Nodes.WebRequest.Tests
 {
     [TestFixture]
     public class WebRequestNodeTests_Runtime
@@ -253,7 +253,7 @@ namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
             node.Headers[1].Value = "X-Dummy: Foobar";
             node.Headers[2].Value = $"Authorization: Basic {Convert.ToBase64String(Encoding.UTF8.GetBytes("daniel:albuschat"))}";
             node.Trigger.Value = true;
-            node.Execute();
+            node.ExecuteAndWait();
             Assert.AreEqual("no-cache", lastRequest.Headers.Get("Cache-Control"));
             Assert.AreEqual("Basic ZGFuaWVsOmFsYnVzY2hhdA==", lastRequest.Headers.Get("Authorization"));
             Assert.AreEqual("Foobar", lastRequest.Headers.Get("X-Dummy"));

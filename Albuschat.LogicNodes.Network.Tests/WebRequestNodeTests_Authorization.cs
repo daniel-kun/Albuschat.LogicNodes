@@ -8,7 +8,7 @@ using Unosquare.Labs.EmbedIO;
 using Unosquare.Labs.EmbedIO.Modules;
 using Unosquare.Net;
 
-namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
+namespace d_albuschat_gmail_com.logic.Nodes.WebRequest.Tests
 {
     [TestFixture]
     public class WebRequestNodeTests_Authorization
@@ -123,7 +123,7 @@ namespace d_albuschat_gmail_com.LogicNodes.WebRequest.Tests
         {
             // Arrange: New node with simple URL
             var node = new WebRequestNode(TestNodeContext.Create());
-            node.AuthType.Value = "None";
+            node.AuthType.Value = AuthCredentials.AuthType.NoAuth.ToString();
             node.URL.Value = "http://localhost:12345/";
             // Act: Set Trigger and Execute:
             node.Trigger.Value = true;
