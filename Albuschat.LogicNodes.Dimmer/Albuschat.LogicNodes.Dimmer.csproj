@@ -7,8 +7,8 @@
     <ProjectGuid>{4476F3EF-AEB7-400F-9927-D68DCDB67AEA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>d_albuschat_gmail_com.logic.Nodes.Dimmer</RootNamespace>
-    <AssemblyName>d_albuschat_gmail_com.logic.Nodes.Dimmer</AssemblyName>
+    <RootNamespace>d_albuschat_gmail_com.logic.Dimmer</RootNamespace>
+    <AssemblyName>d_albuschat_gmail_com.logic.Dimmer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -54,25 +54,25 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\de\d_albuschat_gmail_com.logic.Nodes.Dimmer.html">
+    <Content Include="Help\de\d_albuschat_gmail_com.logic.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\en\d_albuschat_gmail_com.logic.Nodes.Dimmer.html">
+    <Content Include="Help\en\d_albuschat_gmail_com.logic.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\es\d_albuschat_gmail_com.logic.Nodes.Dimmer.html">
+    <Content Include="Help\es\d_albuschat_gmail_com.logic.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\nl\d_albuschat_gmail_com.logic.Nodes.Dimmer.html">
+    <Content Include="Help\nl\d_albuschat_gmail_com.logic.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ru\d_albuschat_gmail_com.logic.Nodes.Dimmer.html">
+    <Content Include="Help\ru\d_albuschat_gmail_com.logic.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\zh\d_albuschat_gmail_com.logic.Nodes.Dimmer.html">
+    <Content Include="Help\zh\d_albuschat_gmail_com.logic.Dimmer.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="icons\d_albuschat_gmail_com.logic.Nodes.Dimmer.png">
+    <Content Include="icons\d_albuschat_gmail_com.logic.Dimmer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

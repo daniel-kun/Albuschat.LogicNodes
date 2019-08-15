@@ -4,7 +4,7 @@ using LogicModule.ObjectModel.TypeSystem;
 using System;
 using System.Collections.Generic;
 
-namespace d_albuschat_gmail_com.logic.Nodes.Dimmer
+namespace d_albuschat_gmail_com.logic.Dimmer
 {
     public class DimmerNode : LogicNodeBase
     {

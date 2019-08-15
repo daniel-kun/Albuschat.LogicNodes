@@ -1,7 +1,7 @@
 ﻿using LogicModule.Nodes.TestHelper;
 using NUnit.Framework;
 
-namespace d_albuschat_gmail_com.logic.Nodes.Dimmer.Tests
+namespace d_albuschat_gmail_com.logic.Dimmer.Tests
 {
     [TestFixture]
     public class DimmerNodeTests_SingleButtonSwitching
