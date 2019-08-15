@@ -4,7 +4,7 @@ using LogicModule.ObjectModel.TypeSystem;
 using System.Net;
 using System.Collections.Generic;
 
-namespace d_albuschat_gmail_com.logic.Nodes.WakeOnLan
+namespace d_albuschat_gmail_com.logic.WakeOnLan
 {
     /// <summary>
     /// A logic node that can wake Wake-On-LAN compatible devices via a Magic Packet (see https://en.wikipedia.org/wiki/Wake-on-LAN)

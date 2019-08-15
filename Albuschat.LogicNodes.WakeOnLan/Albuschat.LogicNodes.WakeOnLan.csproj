@@ -7,8 +7,8 @@
     <ProjectGuid>{FDD39DF2-9C64-4EE7-AE29-15FDAB78E593}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>d_albuschat_gmail_com.logic.Nodes.WakeOnLan</RootNamespace>
-    <AssemblyName>d_albuschat_gmail_com.logic.Nodes.WakeOnLan</AssemblyName>
+    <RootNamespace>d_albuschat_gmail_com.logic.WakeOnLan</RootNamespace>
+    <AssemblyName>d_albuschat_gmail_com.logic.WakeOnLan</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -53,25 +53,25 @@
     <Compile Include="Source\WakeOnLanNode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\de\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.html">
+    <Content Include="Help\de\d_albuschat_gmail_com.logic.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\en\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.html">
+    <Content Include="Help\en\d_albuschat_gmail_com.logic.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\es\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.html">
+    <Content Include="Help\es\d_albuschat_gmail_com.logic.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\nl\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.html">
+    <Content Include="Help\nl\d_albuschat_gmail_com.logic.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ru\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.html">
+    <Content Include="Help\ru\d_albuschat_gmail_com.logic.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\zh\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.html">
+    <Content Include="Help\zh\d_albuschat_gmail_com.logic.WakeOnLan.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="icons\d_albuschat_gmail_com.logic.Nodes.WakeOnLan.png">
+    <Content Include="icons\d_albuschat_gmail_com.logic.WakeOnLan.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
