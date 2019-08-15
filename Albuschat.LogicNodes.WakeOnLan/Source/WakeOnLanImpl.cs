@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace d_albuschat_gmail_com.logic.Nodes.WakeOnLan
+namespace d_albuschat_gmail_com.logic.WakeOnLan
 {
     public class WakeOnLanImpl
     {

@@ -1,26 +1,26 @@
 ﻿{
   "PackageFormatVersion": "1.0",
-  "Assembly": "d_albuschat_gmail_com.logic.Nodes.WakeOnLan.dll",
+  "Assembly": "d_albuschat_gmail_com.logic.abc%!Uvh9TCMCmDT.dll",
   "DependentFiles": [
     "LogicModule.Nodes.Helpers.dll"
   ],
-  "Version": "2.0.0",
+  "Version": "2.0.4",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat, 2018 - 2019",
   "DeveloperId": "d_albuschat_gmail_com",
-  "Licence": "perProject",
+  "License": "Device",
   "PackageId": "{DE776FFA-83AB-4421-AB3B-09DF46434AB3}",
   "Nodes": [
     {
-      "Type": "d_albuschat_gmail_com.logic.Nodes.WakeOnLan.WakeOnLanNode",
+      "Type": "d_albuschat_gmail_com.logic.WakeOnLan.WakeOnLanNode",
       "Name": {
         "en": "Wake On LAN",
         "de": "Wake On LAN"
       },
       "IsConverter": false,
       "Category": "Node",
-      "DefaultIcon": "icons/d_albuschat_gmail_com.logic.Nodes.WakeOnLan.png",
+      "DefaultIcon": "icons/d_albuschat_gmail_com.logic.WakeOnLan.png",
       "HelpTooltip": {
         "en": "Wake a network-attached device with Wake on LAN.",
         "de": "Weckt ein angeschlossenes Netzwerkkgerät mittels Wake On LAN auf."
