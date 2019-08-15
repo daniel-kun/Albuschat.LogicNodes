@@ -1,6 +1,6 @@
 ﻿{
   "PackageFormatVersion": "1.0",
-  "Assembly": "d_albuschat_gmail_com.logic.WakeOnLan.dll",
+  "Assembly": "d_albuschat_gmail_com.logic.Nodes.WakeOnLan.dll",
   "DependentFiles": [
     "LogicModule.Nodes.Helpers.dll"
   ],
