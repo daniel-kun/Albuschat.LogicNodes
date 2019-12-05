@@ -9,7 +9,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace d_albuschat_gmail_com.logic.Nodes.WebRequest
+namespace d_albuschat_gmail_com.logic.WebRequest
 {
     /// <summary>
     /// A logic node that can make arbitrary web requests.

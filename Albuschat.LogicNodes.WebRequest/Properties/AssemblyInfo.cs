@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Albuschat.LogicNodes.WebRequest")]
+[assembly: AssemblyTitle("d_albuschat_gmail_com.logic.WebRequest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Albuschat.LogicNodes.WebRequest")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyProduct("d_albuschat_gmail_com.logic.WebRequest")]
+[assembly: AssemblyCopyright("Copyright © 2018 - 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

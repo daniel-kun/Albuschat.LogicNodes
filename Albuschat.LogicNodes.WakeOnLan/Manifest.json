@@ -1,10 +1,14 @@
 ﻿{
   "PackageFormatVersion": "1.0",
-  "Assembly": "d_albuschat_gmail_com.logic.Nodes.WakeOnLan.dll",
+  "Assembly": "d_albuschat_gmail_com.logic.WakeOnLan.dll",
   "DependentFiles": [
     "LogicModule.Nodes.Helpers.dll"
   ],
-  "Version": "2.0.4",
+  "PackageName": {
+    "de": "Wake On LAN",
+    "en": "Wake On LAN"
+  },
+  "Version": "2.0.5",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat, 2018 - 2019",

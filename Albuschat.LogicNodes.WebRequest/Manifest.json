@@ -1,26 +1,30 @@
 ﻿{
   "PackageFormatVersion": "1.0",
-  "Assembly": "d_albuschat_gmail_com.logic.Nodes.WebRequest.dll",
+  "Assembly": "d_albuschat_gmail_com.logic.WebRequest.dll",
   "DependentFiles": [
     "LogicModule.Nodes.Helpers.dll"
   ],
-  "Version": "3.0.1",
+  "PackageName": {
+    "de": "Web Request",
+    "en": "Web Request"
+  },
+  "Version": "3.0.4",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat, 2018 - 2019",
   "DeveloperId": "d_albuschat_gmail_com",
-  "Licence": "perProject",
-  "PackageId": "{DE776FFA-83AB-4421-AB3B-09DF46434AB3}",
+  "License": "Device",
+  "PackageId": "{D88DA60A-B209-46FA-9113-59218FB2B603}",
   "Nodes": [
     {
-      "Type": "d_albuschat_gmail_com.logic.Nodes.WebRequest.WebRequestNode",
+      "Type": "d_albuschat_gmail_com.logic.WebRequest.WebRequestNode",
       "Name": {
         "en": "Web Request",
         "de": "Web Request"
       },
       "IsConverter": false,
       "Category": "Node",
-      "DefaultIcon": "icons/d_albuschat_gmail_com.logic.Nodes.WebRequest.png",
+      "DefaultIcon": "icons/d_albuschat_gmail_com.logic.WebRequest.png",
       "HelpTooltip": {
         "en": "Make an arbitrary web request",
         "de": "Setzt einen beliebigen Web Request ab."

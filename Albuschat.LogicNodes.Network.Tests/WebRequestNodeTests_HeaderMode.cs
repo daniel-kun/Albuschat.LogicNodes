@@ -1,7 +1,7 @@
 ﻿using LogicModule.Nodes.TestHelper;
 using NUnit.Framework;
 
-namespace d_albuschat_gmail_com.logic.Nodes.WebRequest.Tests
+namespace d_albuschat_gmail_com.logic.WebRequest.Tests
 {
     [TestFixture]
     public class WebRequestNodeTests_HeaderMode
