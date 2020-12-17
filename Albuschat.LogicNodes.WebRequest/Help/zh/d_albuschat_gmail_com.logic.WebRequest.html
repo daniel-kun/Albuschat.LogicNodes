@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Logikbaustein "Web Request"</title>
 </head>
-
 
 <xmp theme="cerulean" style="display:none;">
 
@@ -28,6 +27,7 @@ unter Anderem:
 - Nuki (https://nuki.io/de/api/)
 - Phillips Hue (https://www.developers.meethue.com/documentation/getting-started, benötigt vorher eine Registrierung)
 - Diverse netzwerkfähige Fernseher, Beamer und HiFi-Verstärker
+- Diverse PV-Anlagen
 
 Auch "Smart Home Gateways" können damit angesteurt werden, wodurch
 sich Möglichkeiten zu allen von den Gateways unterstützten Geräten und Services
@@ -44,9 +44,7 @@ die als Basis verwendet werden können.
 
 ## Einschränkungen
 
-Es gibt ein paar Dinge, die mit diesem Baustein nicht möglich sind:
-- HTTPS-Anfragen sind nicht möglich
-- Ein paar spezielle Header können nicht gesetzt werden (Range, Proxy-Connection, Expect, Transfer-Encoding)
+Ein paar spezielle Header können in diesem Baustein nicht gesetzt werden (Range, Proxy-Connection, Expect, Transfer-Encoding).
 
 ## Eingänge
 
@@ -111,7 +109,7 @@ Value=1&Brightness=100
 |------------|--------------|
 | `400`-`499` | HTTP Statuscode. Die URL, Methode oder der Content-Type oder Body sind nicht korrekt. Z.B. existiert die Webseite nicht oder der Body ist nicht richtig formatiert. |
 | `500`-`599` | HTTP Statuscode. Der Server konnte die Anfrage nicht bearbeiten, ggf. wegen eines internen Serverfehlers. | 
-| `997` | Interner Fehlercode. Die URL beginnt nicht mit http://. Bitte beachten Sie, dass HTTPS nicht unterstützt wird. |
+| `997` | Interner Fehlercode. Die URL beginnt nicht mit http:// oder https://. |
 | `998` | Interner Fehlercode. Ein unbekannter Fehler ist aufgetreten. In "Fehlermeldung" steht die originale Fehlermeldung der C#-Runtime. |
 | `999` | Interner Fehlercode. Die URL keine gültige URL. Der Web Request wurde nicht abgesetzt. |
 
@@ -131,14 +129,14 @@ enthält.
 Diese URL hat den Aufbau "https://maker.ifttt.com/trigger/<individueller-event-name>/with/key/<your-key>".
 Diese URL kann einfach in einem Web Request-Baustein als URL mit der Methode "GET" eingetragen werden, mit entsprechendem
 Event-Namen (dieser wird in dem verwendeten Applet festgelegt) und Key (dieser findet sich auf IFTTT in
-der Doku des WebHook services). Es muss allerdings das https:// durch ein http:// ersetzt werden.
+der Doku des WebHook services).
 
 Sollen jedoch Werte übertragen werden, muss die Methode zu "POST", der Content-Type zu "application/json"
 und im Body gültiges JSON eingetragen werden. Hier ein Beispiel:
 
 | Input | Wert | Beschreibung |
 |-------|------|--------------|
-| `URL` | http://maker.ifttt.com/trigger/<event-name>/with/key/<your-key> | Der \<event-name\> kann selbst gewählt werden und wird im Applet, das durch diesen WebHook getriggert wird, eingetragen. Der Key findet sich i der Dokumentatio des WebHook-Services in Ihrem IFTTT-Account. |
+| `URL` | https://maker.ifttt.com/trigger/<event-name>/with/key/<your-key> | Der \<event-name\> kann selbst gewählt werden und wird im Applet, das durch diesen WebHook getriggert wird, eingetragen. Der Key findet sich i der Dokumentatio des WebHook-Services in Ihrem IFTTT-Account. |
 | `Methode` | POST | Es wird POST verwendet, damit auch Werte gesendet werden können |
 | `Content-Type` | application/json | IFTTT verwendet das JSON-Format, um Werte an einen WebHook zu übergeben |
 | `Body` | ```{ "value1": "x", "value2": "y", "value3": "z" } | Sendet die drei Werte x, y und z an die Variablen "value1", "value2" und "value3", die im Applet in der Action verwendet werden kann. (per "Add ingredient") |

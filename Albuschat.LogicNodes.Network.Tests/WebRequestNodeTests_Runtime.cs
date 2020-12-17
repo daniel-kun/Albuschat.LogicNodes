@@ -322,5 +322,20 @@ namespace d_albuschat_gmail_com.logic.WebRequest.Tests
             Assert.IsNull(lastRequest.Headers.Get("Content-Type"));
         }
 
+        [Test]
+        public void When_UsingHTTPS_Should_Succeed()
+        {
+            // Arrange: Create web request with HTTPS URI
+            var node = new WebRequestNode(TestNodeContext.Create());
+            node.URL.Value = "http://init-api.gira.de/time/v1/current-time";
+            // Act: Execute node
+            node.Trigger.Value = true;
+            node.ExecuteAndWait();
+            // Assert: Message includes "START CERTIFICATE"
+            Assert.IsFalse(node.ErrorCode.HasValue);
+            Assert.IsFalse(node.ErrorMessage.HasValue);
+            Assert.IsTrue(node.Response.HasValue);
+        }
+
     }
 }

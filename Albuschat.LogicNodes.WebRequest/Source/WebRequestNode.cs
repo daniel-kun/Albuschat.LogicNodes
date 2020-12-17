@@ -420,9 +420,9 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                 try
                 {
                     Uri uri = new Uri(ReplaceAllVars(URL, Variables));
-                    if (uri.Scheme != "http")
+                    if (uri.Scheme != "http" && uri.Scheme != "https")
                     {
-                        SetResultCallback(997, $"Unsupported URI scheme \"{uri.Scheme}\". Only HTTP is supported.", null);
+                        SetResultCallback(997, $"Unsupported URI scheme \"{uri.Scheme}\". Only HTTP and HTTPS is supported.", null);
                         return;
                     }
 

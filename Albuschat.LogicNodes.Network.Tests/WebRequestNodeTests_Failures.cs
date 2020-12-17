@@ -119,20 +119,6 @@ namespace d_albuschat_gmail_com.logic.WebRequest.Tests
         }
 
         [Test]
-        public void When_UsingHTTPS_Should_FailWithErrorCode()
-        {
-            // Arrange: Create web request with HTTPS URI
-            var node = new WebRequestNode(TestNodeContext.Create());
-            node.URL.Value = "https://www.google.de";
-            // Act: Execute node
-            node.Trigger.Value = true;
-            node.ExecuteAndWait();
-            // Assert: Error code 997 with corresponding error message must be replied
-            Assert.AreEqual(997, node.ErrorCode.Value);
-            Assert.IsTrue(node.ErrorMessage.HasValue);
-        }
-
-        [Test]
         public void When_UsingFTP_Should_FailWithErrorCode()
         {
             // Arrange: Create web request with FTP URI
