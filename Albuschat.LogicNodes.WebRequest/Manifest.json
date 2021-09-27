@@ -8,12 +8,12 @@
     "de": "Web Request",
     "en": "Web Request"
   },
-  "Version": "3.0.5",
+  "Version": "3.0.14",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat, 2018 - 2019",
   "DeveloperId": "d_albuschat_gmail_com",
-  "License": "Device",
+  "License": "Free",
   "PackageId": "{D88DA60A-B209-46FA-9113-59218FB2B603}",
   "Nodes": [
     {

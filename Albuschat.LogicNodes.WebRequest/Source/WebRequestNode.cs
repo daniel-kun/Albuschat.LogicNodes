@@ -30,7 +30,7 @@ namespace d_albuschat_gmail_com.logic.WebRequest
             }, "GET");
             this.AuthType = this.TypeService.CreateEnum(
                 "HttpAuthType",
-                "AuthType", 
+                "AuthType",
                 new string[]
                 {
                     AuthCredentials.AuthType.NoAuth.ToString(),
@@ -58,7 +58,7 @@ namespace d_albuschat_gmail_com.logic.WebRequest
             "HeaderMode.0");
             this.HeaderMode.ValueSet += UpdateHeaders;
             this.Headers = new List<StringValueObject>();
-            this.Variables  = new List<StringValueObject>();
+            this.Variables = new List<StringValueObject>();
             this.Response = this.TypeService.CreateString(PortTypes.String, "Response");
             this.ErrorCode = this.TypeService.CreateInt(PortTypes.Integer, "ErrorCode");
             this.ErrorMessage = this.TypeService.CreateString(PortTypes.String, "ErrorMessage");
@@ -266,7 +266,7 @@ namespace d_albuschat_gmail_com.logic.WebRequest
         /// <summary>
         /// Defines how many - if any - custom headers can be set.
         /// </summary>
-        [Input (IsInput = false, IsDefaultShown = false)]
+        [Input(IsInput = false, IsDefaultShown = false)]
         public EnumValueObject HeaderMode { get; private set; }
 
         /// <summary>
@@ -278,10 +278,10 @@ namespace d_albuschat_gmail_com.logic.WebRequest
         /// <summary>
         /// The response of the web request, if it was successful.
         /// </summary>
-        [Output (IsRequired = false)]
+        [Output(IsRequired = false)]
         public StringValueObject Response { get; private set; }
 
-        [Output (IsRequired = false, IsDefaultShown = false)]
+        [Output(IsRequired = false, IsDefaultShown = false)]
         public IntValueObject ErrorCode { get; private set; }
 
         [Output(IsRequired = false, IsDefaultShown = false)]
@@ -315,8 +315,9 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                 string body = Body != null ? (Body.HasValue ? Body.Value : null) : null;
                 string contentType = ContentType != null ? (ContentType.HasValue ? TranslateContentType(ContentType.Value) : null) : null;
                 Dictionary<string, string> variables = BuildDictionaryFromVariables(this.Variables);
-            
-                var thread = new Thread(() => {
+
+                var thread = new Thread(() =>
+                {
                     _BeforeExecute?.Invoke();
                     ExecuteWebRequest(
                         Method.HasValue ? Method.Value : null,
@@ -342,7 +343,7 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                             }
                             _AfterExecute?.Invoke();
                         });
-                    });
+                });
                 thread.Start();
             }
         }
@@ -355,6 +356,18 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                 result.Add(variable.Name, variable.Value);
             }
             return result;
+        }
+
+        private static String VerboseExceptionMessage(Exception e)
+        {
+            if (e.InnerException != null)
+            {
+                return $"{e.Message} ({e.InnerException.Message})";
+            }
+            else
+            {
+                return e.Message;
+            }
         }
 
         public static void ExecuteWebRequest(string Method, string URL, AuthCredentials Auth, IEnumerable<string> Headers, string ContentType, string Body, Dictionary<string, string> Variables, Action<int?, string, string> SetResultCallback)
@@ -388,7 +401,8 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                         headerName = header.Substring(0, sep);
                         headerValue = header.Substring(sep + 1).Trim();
                         return true;
-                    } else
+                    }
+                    else
                     {
                         return false;
                     }
@@ -428,14 +442,15 @@ namespace d_albuschat_gmail_com.logic.WebRequest
 
                     HttpWebRequest client = (HttpWebRequest)HttpWebRequest.Create(uri);
                     Auth.ApplyTo(client);
-                
+
                     Console.WriteLine($"Making web request {uri}");
                     foreach (var header in Headers)
                     {
                         if (header != null)
                         {
                             Console.WriteLine($"Using header {header}");
-                            if (!SetRestrictedHeader(header, client)) {
+                            if (!SetRestrictedHeader(header, client))
+                            {
                                 client.Headers.Add(header);
                             }
                         }
@@ -466,7 +481,11 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                 }
                 catch (WebException e)
                 {
-                    if (e.Response is HttpWebResponse errorResponse) {
+                    // An exception is also thrown when a valid response is received, but the
+                    // response code indicates failure (such as "not authorized" or similar).
+                    WebResponse response = e.Response;
+                    if (response is HttpWebResponse errorResponse)
+                    {
                         try
                         {
                             using (var result = errorResponse.GetResponseStream())
@@ -477,16 +496,29 @@ namespace d_albuschat_gmail_com.logic.WebRequest
                                     return;
                                 }
                             }
-                        } catch (Exception)
+                        }
+                        catch (Exception e2)
                         {
+                            SetResultCallback(998, $"Failed to get response stream: {VerboseExceptionMessage(e2)}", null);
+                            return;
                         }
                     }
-                    // Fall-through:
-                    SetResultCallback(998, "Unknown error", null);
+                    else
+                    {
+                        if (e.Response == null)
+                        {
+                            SetResultCallback(998, $"Failed to make response: {VerboseExceptionMessage(e)}", null);
+                        }
+                        else
+                        {
+                            SetResultCallback(998, $"Unsupported response type {e.Response.GetType().FullName}: {VerboseExceptionMessage(e)}", null);
+                        }
+                        return;
+                    }
                 }
                 catch (Exception e)
                 {
-                    SetResultCallback(999, e.Message, null);
+                    SetResultCallback(999, VerboseExceptionMessage(e), null);
                     return;
                 }
             }
@@ -495,7 +527,8 @@ namespace d_albuschat_gmail_com.logic.WebRequest
         private static string TrimZeroPadding(string str)
         {
             int zeroPadding = str.IndexOf('\0');
-            if (zeroPadding >= 0) {
+            if (zeroPadding >= 0)
+            {
                 return str.Substring(0, zeroPadding);
             }
             else
