@@ -8,12 +8,12 @@
     "de": "Wake On LAN",
     "en": "Wake On LAN"
   },
-  "Version": "2.0.5",
+  "Version": "2.1.0",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat, 2018 - 2019",
   "DeveloperId": "d_albuschat_gmail_com",
-  "License": "Device",
+  "License": "Free",
   "PackageId": "{DE776FFA-83AB-4421-AB3B-09DF46434AB3}",
   "Nodes": [
     {

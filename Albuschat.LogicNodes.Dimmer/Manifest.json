@@ -8,12 +8,12 @@
     "de": "Umschalten und Dimmen per Binäreingang",
     "en": "Toggle and dim with binary input"
   },
-  "Version": "2.0.5",
+  "Version": "2.1.0",
   "ReleaseNotes": null,
   "Author": "Daniel Albuschat",
   "Copyright": "© Daniel Albuschat 2018 - 2019",
   "DeveloperId": "d_albuschat_gmail_com",
-  "License": "Device",
+  "License": "Free",
   "PackageId": "{E854241C-79AA-41D4-BF40-FCC97BE9CFCA}",
   "Nodes": [
     {
