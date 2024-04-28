@@ -92,23 +92,47 @@ customElements.define('markdown-style', MarkdownStyle);</script><markdown-style 
     <h1 id="dokumentation"><a class="anchor" aria-hidden="true" tabindex="-1" href="#dokumentation"><span class="octicon octicon-link"></span></a>Dokumentation</h1>
     <div style="text-align: right; padding: 20px 0px 20px 0px">© Daniel Albuschat, 2018-2019</div>
     <p>
-      Der Baustein Wake on LAN ermöglicht es, Geräte mit einer LAN-Schnittstelle (mit RJ45 oder "Ethernet"-Buchse) einzuschalten,
-      sofern diese Wake on LAN unterstützen.
+      Der Baustein Web Request ermöglicht es, HTTP-Anfragen an Webseiten, REST-APIs oder sonstige
+      HTTP Gegenstellen zu richten und die Ergebnisse weiterzuverarbeiten.
     </p>
     <p>
-      Das sind die meisten Geräte mit LAN-Schnittstelle, die seit 2010 auf den Markt gekommen sind. Auch ältere Geräte können
-      Wake on LAN unterstützen. Netzwerkkarten von PCs und Laptops unterstützen dies bereits üblicherweise seit 2000. Meistens wird die Wake On LAN-Fähigkeit
-      von Geräten nicht dokumentiert, deshalb ist man häufig darauf angewiesen, diese zu testen.
+      Im einfachsten Falle kann ein textueller oder numerischer Wert von einer
+      HTTP-Schnittstelle eines Smart Home-Gerätes abgerufen und in der Logik
+      weiterverarbeitet werden. Über das Nutzen der Methode "POST" oder anderer
+      Methoden ist es aber auch möglich, Geräte zu steuern, Werte in den Geräten
+      oder Webschnittstellen zu verändern, zu Löschen, etc. Voraussetzung ist,
+      dass die entsprechende Gegenstelle eine HTTP-Schnittstelle bietet.
     </p>
     <p>
-      Ob ein Gerät Wake On LAN unterstütz, kann mit Hilfe von mobilen Apps getestet werden, beispielsweise
-      für <a href="https://play.google.com/store/apps/details?id=co.uk.mrwebb.wakeonlan&#x26;hl=en">Android</a> und <a href="https://apps.apple.com/de/app/mocha-wol/id422625778">iOS</a>.
+      Populäre Beispiele von Geräten oder Services mit HTTP-Schnittstelle sind
+      unter Anderem:
     </p>
-    <p>Manche Geräte, wie die Sony Playstation 4, unterstützen auf Grund der Politik der Hersteller leider kein Wake On LAN, obwohl sie sehr neu sind und alle Voraussetzungen erfüllen.</p>
+    <ul>
+      <li>IFTTT (<a href="https://ifttt.com/services/maker_webhooks">https://ifttt.com/services/maker_webhooks</a>)</li>
+      <li>Nuki (<a href="https://nuki.io/de/api/">https://nuki.io/de/api/</a>)</li>
+      <li>Phillips Hue (<a href="https://www.developers.meethue.com/documentation/getting-started">https://www.developers.meethue.com/documentation/getting-started</a>, benötigt vorher eine Registrierung)</li>
+      <li>Diverse netzwerkfähige Fernseher, Beamer und HiFi-Verstärker</li>
+      <li>Diverse PV-Anlagen</li>
+    </ul>
     <p>
-      Um ein Wake On LAN durchzuführen, wird die MAC-Adresse des aufzuweckenden Gerätes benötigt. Diese wird üblicherweise im Format "AA-BB-CC-DD-EE-FF" oder "AA:BB:CC:DD:EE:FF" ausgegeben und kann entweder
-      über die oben genannten Apps, den Heimrouter (z.B. eine Fritz!Box), den Bereich "Netzwerk" im Windows Explorer oder den Befehl <code>arp</code> der Kommandozeile herausgefunden werden.
+      Auch "Smart Home Gateways" können damit angesteurt werden, wodurch
+      sich Möglichkeiten zu allen von den Gateways unterstützten Geräten und Services
+      öffnet, was in Summe eine nahezu allumfassende Basis bietet:
     </p>
+    <ul>
+      <li>Home Assistant - Open Source (<a href="https://developers.home-assistant.io/docs/en/external_api_rest.html">https://developers.home-assistant.io/docs/en/external_api_rest.html</a>)</li>
+      <li>iobroker - Open Source (<a href="https://github.com/ioBroker/ioBroker.simple-api">https://github.com/ioBroker/ioBroker.simple-api</a>)</li>
+      <li>FHEM - Open Source (<a href="https://fhem.de/">https://fhem.de/</a>)</li>
+      <li>Homee (<a href="https://hom.ee/">https://hom.ee/</a>)</li>
+      <li>Node-RED (<a href="https://nodered.org/">https://nodered.org/</a>)</li>
+    </ul>
+    <p>
+      Am Ende finden sich praktikable Beispiele zu einigen dieser Geräte oder Dienste,
+      die als Basis verwendet werden können.
+    </p>
+    <h2 id="einschränkungen"><a class="anchor" aria-hidden="true" tabindex="-1" href="#einschränkungen"><span class="octicon octicon-link"></span></a>Einschränkungen</h2>
+    <p>Ein paar spezielle Header können in diesem Baustein nicht gesetzt werden (Range, Proxy-Connection, Expect, Transfer-Encoding).</p>
+    <h2 id="eingänge"><a class="anchor" aria-hidden="true" tabindex="-1" href="#eingänge"><span class="octicon octicon-link"></span></a>Eingänge</h2>
     <table>
       <thead>
         <tr>
@@ -121,16 +145,281 @@ customElements.define('markdown-style', MarkdownStyle);</script><markdown-style 
         <tr>
           <td><code>Trigger</code></td>
           <td>Binary</td>
-          <td>Trigger muss auf '1' gesetzt werden, um die Webanfrage gemäß der folgenden Inputs abzusenden.</td>
+          <td>Trigger muss auf '1' gesetzt werden, um die Webanfrage gemäß der folgenden Inputs abzusenden. <em>Wichtig:</em> Die Anfrage wird <em>nur</em> durch Setzen des Triggers auf '1' ausgelöst und nicht durch die Veränderungen einer oder mehrerer der anderen Inputs.</td>
         </tr>
         <tr>
-          <td><code>MAC-Adresse</code></td>
+          <td><code>URL</code></td>
           <td>String</td>
-          <td>Die MAC-Adresse des Gerätes, das eingeschaltet werden soll. Kann im Format AA-BB-CC-DD-EE-FF oder AA:BB:CC:DD:EE:FF oder AABBCCDDEEFF sein.</td>
+          <td>Die URL, die abgerufen werden soll. Muss mit http:// beginnen. Die URL kann beliebig viele Variablen beinhalten, siehe Beschreibung der Inputs 
+            <variable>.</variable>
+          </td>
+        </tr>
+        <tr>
+          <td><code>Methode</code></td>
+          <td>HTTP Methode</td>
+          <td>Die Abfrage-Methode, die verwendet werden soll. Bei der Methode 'GET' wird die URL genau so abgerufen, wie es ein Browser machen würde, wenn man die URL in der Adresszeile eingibt. Benutzen Sie 'GET' beispielsweise, um normale Webseiteninhalte abzurufen. Andere häufig verwendete Methoden sind 'POST', 'PUT' und 'DELETE'. Welche Methode zu verwenden ist, entnehmen Sie der Spezifikation der API, die Sie ansprechen.</td>
+        </tr>
+        <tr>
+          <td><code>Authorization</code></td>
+          <td>HTTP Authorization-Methode</td>
+          <td>Gibt an, ob eine Authorisierungs-Methode bei der Abfrage genutzt werden soll, und falls ja, welche. Es stehen Basic Authorization und Bearer Token zur Auswahl. Spezieller Authorization-Methoden können stattdessen als benutzerdefinierter Header verwendet werden.</td>
+        </tr>
+        <tr>
+          <td><code>Benutzername</code></td>
+          <td>String</td>
+          <td>Der Benutzername, mit dem sich an der Gegenstelle per HTTP Basic Authorization angemeldet werden soll. Nur sichtbar, wenn Authorization auf "Basic Auth" gestellt wurde.</td>
+        </tr>
+        <tr>
+          <td><code>Passwort</code></td>
+          <td>String</td>
+          <td>Das Passwort passend zum Benutzernamen, mit dem sich an der Gegenstelle per HTTP Basic Authorization angemeldet werden soll. Nur sichtbar, wenn Authorization auf "Basic Auth" gestellt wurde.</td>
+        </tr>
+        <tr>
+          <td><code>Token</code></td>
+          <td>String</td>
+          <td>Der Authorization Bearer Token, mit dem sich an der Gegenstelle angemeldet werden soll. Nur sichtbar, wenn Authorization auf "Bearer Token" gestellt wurde.</td>
+        </tr>
+        <tr>
+          <td><code>Content-Type</code></td>
+          <td>Content Type</td>
+          <td>Nur sichtbar, wenn die Methode nicht 'GET' ist. Gibt an, in welchem Format der Inhalt der Abfrage im Body angegeben wird. Welcher Content-Type zu verwenden ist, und wie der Body formatiert werden muss, entnehmen Sie bitte der Spezifikation der API, die Sie ansprechen.</td>
+        </tr>
+        <tr>
+          <td><code>Body</code></td>
+          <td>String</td>
+          <td>Nur sichtbar, wenn die Methode nicht 'GET' ist. Enthält den Inhalt der Anfrage, die an den Server gesendet werden soll. Der Inhalt muss entsprechend dem gewählten Content-Type formatiert sein. Siehe Liste der Content-Types weiter unten. Wie der Inhalt des Body gestaltet werden muss, entnehmen Sie bitte der Spezifikation der API, die Sie ansprechen. Der Body kann beliebig viele Variablen beinhalten, siehe Beschreibung der Inputs 
+            <variable>.</variable>
+          </td>
+        </tr>
+        <tr>
+          <td><code>&#x3C;Variablen></code></td>
+          <td>String</td>
+          <td>In der URL und dem Body können Variablen verwendet werden, die mit geschweiften Klammern gekennzeichnet werden. z.B. {Variable1}. Variablen dürfen nur Buchstaben und Ziffern beinhalten und müssen mit einem Buchstaben beginnen. Für jede Variable wird ein neuer Input erzeugt. Beim Ausführen des Web Request per Trigger werden in der URL und dem Body alle Vorkomnisse einer Variablen durch den Inhalt des jeweiligen Inputs ersetzt. Variablen können in URL und Body mehrfach verwendet werden. Es entsteht dann ein Input, dessen Wert bei allen Vorkomnissen der Variable eingesetzt wird.</td>
+        </tr>
+        <tr>
+          <td><code>Eigene Header setzen</code></td>
+          <td>Headeranzahl</td>
+          <td>Gibt die Anzahl der eigenen Header an, die bei der Anfrage gesetzt werden sollen. Je nach angesprochener API müssen spezielle, teils API-spezifische Header gesetzt werden, um Inhalte abzurufen oder Aktionen auszuführen. Welche Header zus setzen sind, entnehmen Sie bitte der Spezifikation der API, die Sie ansprechen.</td>
+        </tr>
+        <tr>
+          <td><code>Header #n</code></td>
+          <td>String</td>
+          <td>Enthält einen Header, der bei der Anfrage gesetzt werden soll. Header müssen das Format "
+            <name>: 
+              <inhalt>" haben, wobei "
+                <name>" nur aus Buchstaben und Bindestrichen bestehen darf.</name>
+              </inhalt>
+            </name>
+          </td>
         </tr>
       </tbody>
     </table>
-    <p>Ob das Wake On LAN erfolgreich war, kann leider nicht ermittelt werden. Deshalb hat der Baustein keine Outputs.</p>
+    <h2 id="content-type"><a class="anchor" aria-hidden="true" tabindex="-1" href="#content-type"><span class="octicon octicon-link"></span></a>Content-Type</h2>
+    <p>Der Content-Type wird vorwiegend bei Anfragen der Methode 'POST', 'PUT und 'DELETE' verwendet. Bei der Methode 'GET' ist das Setzen des Content-Type und das Senden eines Body nicht möglich.</p>
+    <h3 id="textplain"><a class="anchor" aria-hidden="true" tabindex="-1" href="#textplain"><span class="octicon octicon-link"></span></a>text/plain</h3>
+    <p>Der Inhalt von Body ist in keinem speziellen Format, sondern regulärer Fließtext. Er wird in UTF-8 übertragen.</p>
+    <h3 id="applicationjson"><a class="anchor" aria-hidden="true" tabindex="-1" href="#applicationjson"><span class="octicon octicon-link"></span></a>application/json</h3>
+    <p>
+      Der Inhalt von Body ist im JSON-Format. Siehe <a href="https://de.wikipedia.org/wiki/JavaScript_Object_Notation">https://de.wikipedia.org/wiki/JavaScript_Object_Notation</a>.
+      Beispiel:
+    </p>
+    <pre class="language-json"><code class="language-json code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span> <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token property">"brightess"</span><span class="token operator">:</span> <span class="token string">"100"</span> <span class="token punctuation">}</span>
+</span></code><div onclick="copied(this)" data-code="{ &#x22;value&#x22;: &#x22;1&#x22;, &#x22;brightess&#x22;: &#x22;100&#x22; }
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <h3 id="applicationxml"><a class="anchor" aria-hidden="true" tabindex="-1" href="#applicationxml"><span class="octicon octicon-link"></span></a>application/xml</h3>
+    <p>
+      Der Inhalt von Body ist im XML-Format. Siehe <a href="https://de.wikipedia.org/wiki/Extensible_Markup_Language">https://de.wikipedia.org/wiki/Extensible_Markup_Language</a>.
+      Beispiel:
+    </p>
+    <pre class="language-xml"><code class="language-xml code-highlight"><span class="code-line line-number" line="1"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>body</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>brightness</span><span class="token punctuation">></span></span>100<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>brightness</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>body</span><span class="token punctuation">></span></span>
+</span></code><div onclick="copied(this)" data-code="<body value=&#x22;1&#x22;><brightness>100</brightness></body>
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <h3 id="applicationx-www-form-urlencoded"><a class="anchor" aria-hidden="true" tabindex="-1" href="#applicationx-www-form-urlencoded"><span class="octicon octicon-link"></span></a>application/x-www-form-urlencoded</h3>
+    <p>
+      Der Inhalt von Body ist in dem Format, in dem das Übertragen von HTML-Forms üblicherweise geschieht. Siehe <a href="https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms">https://en.wikipedia.org/wiki/POST_(HTTP)#Use_for_submitting_web_forms</a>.
+      Beispiel:
+    </p>
+    <pre><code class="code-highlight"><span class="code-line line-number" line="1">Value=1&#x26;Brightness=100
+</span></code><div onclick="copied(this)" data-code="Value=1&#x26;Brightness=100
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+    <h2 id="ausgänge"><a class="anchor" aria-hidden="true" tabindex="-1" href="#ausgänge"><span class="octicon octicon-link"></span></a>Ausgänge</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Bezeichnung</th>
+          <th>Porttyp</th>
+          <th>Beschreibung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Antwort</code></td>
+          <td>String</td>
+          <td>Ist der Web Request erfolgreich, wird der Inhalt, den der Server gesendet hat, in diesen Ausgang geschrieben. Wird beispielsweise ein GET auf eine Webseite gemacht, enthält dieser Ausgang den HTML-Code. Werden REST APIs angesprochen, enthält der Ausgang üblicherweise die in JSON oder XML gestaltete Antwort des Servers.</td>
+        </tr>
+        <tr>
+          <td><code>Fehlercode (HTTP Status)</code></td>
+          <td>Integer</td>
+          <td>Ist der Web Request fehlgeschlagen, enthält dieser Ausgang einen entsprecheden Fehlercode. Konnte die Anfrage gar nicht erst gesendet werden, werden die Fehlercodes 997-999 gesetzt. Wurde die Anfrage zwar erfolgreich abgesetzt, aber vom Server mit einem Fehler quittiert, wird der entsprechende HTTP-kompatible Statuscode vom Server gesetzt. Siehe Beschreibung der Fehlercodes unten. <em>Hinweis:</em> Da Weiterleitungen immer gefolgt wird, werden keine Fehlercodes, die zwischen '300' und '399' liegen, ausgegeben.</td>
+        </tr>
+        <tr>
+          <td><code>Fehlermeldung</code></td>
+          <td>String</td>
+          <td>Ist der Web Request fehlgeschlagen, enthält dieser Ausgang eine Fehlermeldung. Im Falle der Fehlercodes 997-999 ist die Fehlermeldung auf Englisch und beschreibt, weshalb der Web Request nicht abgesetzt werden konnte. Bei anderen Fehlercodes stammt die Fehlermeldung vom Server.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="fehlercodes"><a class="anchor" aria-hidden="true" tabindex="-1" href="#fehlercodes"><span class="octicon octicon-link"></span></a>Fehlercodes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Fehlercode</th>
+          <th>Beschreibung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>400</code>-<code>499</code></td>
+          <td>HTTP Statuscode. Die URL, Methode oder der Content-Type oder Body sind nicht korrekt. Z.B. existiert die Webseite nicht oder der Body ist nicht richtig formatiert.</td>
+        </tr>
+        <tr>
+          <td><code>500</code>-<code>599</code></td>
+          <td>HTTP Statuscode. Der Server konnte die Anfrage nicht bearbeiten, ggf. wegen eines internen Serverfehlers.</td>
+        </tr>
+        <tr>
+          <td><code>997</code></td>
+          <td>Interner Fehlercode. Die URL beginnt nicht mit http:// oder https://.</td>
+        </tr>
+        <tr>
+          <td><code>998</code></td>
+          <td>Interner Fehlercode. Ein unbekannter Fehler ist aufgetreten. In "Fehlermeldung" steht die originale Fehlermeldung der C#-Runtime.</td>
+        </tr>
+        <tr>
+          <td><code>999</code></td>
+          <td>Interner Fehlercode. Die URL keine gültige URL. Der Web Request wurde nicht abgesetzt.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Mehr Infos zu den HTTP Statuscodes finden sich in der Spezifikation der API, die Sie ansprechen.
+      Eine allgemeine Übersicht findet sich hier: <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a>.
+    </p>
+    <h1 id="beispiele"><a class="anchor" aria-hidden="true" tabindex="-1" href="#beispiele"><span class="octicon octicon-link"></span></a>Beispiele</h1>
+    <h2 id="ifttt-webhook-auslösen"><a class="anchor" aria-hidden="true" tabindex="-1" href="#ifttt-webhook-auslösen"><span class="octicon octicon-link"></span></a>IFTTT WebHook auslösen</h2>
+    <p>
+      Es ist möglich, einen IFTTT "WebHook" als "IF"-Bestandteil eines Applets zu verwenden, der sich
+      per Web Request-Baustein auslösen lässt. Dafür muss zuerst auf IFTTT ein Applet
+      zusammengebaut werden, das einen WebHook als Auslöser verwendet. Außerdem muss
+      die URL herausgefunden werden, mit der der WebHook ausgelöst wird und der den individuellen "Key"
+      enthält.
+    </p>
+    <p>Diese URL hat den Aufbau "<a href="https://maker.ifttt.com/trigger/">https://maker.ifttt.com/trigger/</a>
+      <individueller-event-name>/with/key/
+        <your-key>
+          ".
+          Diese URL kann einfach in einem Web Request-Baustein als URL mit der Methode "GET" eingetragen werden, mit entsprechendem
+          Event-Namen (dieser wird in dem verwendeten Applet festgelegt) und Key (dieser findet sich auf IFTTT in
+          der Doku des WebHook services).
+        </your-key>
+      </individueller-event-name>
+    </p>
+    <p>
+      Sollen jedoch Werte übertragen werden, muss die Methode zu "POST", der Content-Type zu "application/json"
+      und im Body gültiges JSON eingetragen werden. Hier ein Beispiel:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Wert</th>
+          <th>Beschreibung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>URL</code></td>
+          <td><a href="https://maker.ifttt.com/trigger/">https://maker.ifttt.com/trigger/</a>
+            <event-name>/with/key/
+              <your-key></your-key>
+            </event-name>
+          </td>
+          <td>Der &#x3C;event-name> kann selbst gewählt werden und wird im Applet, das durch diesen WebHook getriggert wird, eingetragen. Der Key findet sich i der Dokumentatio des WebHook-Services in Ihrem IFTTT-Account.</td>
+        </tr>
+        <tr>
+          <td><code>Methode</code></td>
+          <td>POST</td>
+          <td>Es wird POST verwendet, damit auch Werte gesendet werden können</td>
+        </tr>
+        <tr>
+          <td><code>Content-Type</code></td>
+          <td>application/json</td>
+          <td>IFTTT verwendet das JSON-Format, um Werte an einen WebHook zu übergeben</td>
+        </tr>
+        <tr>
+          <td><code>Body</code></td>
+          <td>```{ "value1": "x", "value2": "y", "value3": "z" }</td>
+          <td>Sendet die drei Werte x, y und z an die Variablen "value1", "value2" und "value3", die im Applet in der Action verwendet werden kann. (per "Add ingredient")</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 id="nuki-bridge-api"><a class="anchor" aria-hidden="true" tabindex="-1" href="#nuki-bridge-api"><span class="octicon octicon-link"></span></a>Nuki Bridge API</h2>
+    <p>
+      Nuki bietet verschiedene APIs an. Am sinnvollsten ist in Verbindung mit dem Web Request-Baustein wohl die Bridge API zu verwenden,
+      da diese ausschließlich lokal kommuniziert und keine Cloud-Anbindung oder Internetverbindung benötigt.
+    </p>
+    <p>Am 19.06.2019 war die aktuelle Version der Bridge API hier zu finden: <a href="https://nuki.io/wp-content/uploads/2018/04/20180330-Bridge-API-v1.7.pdf">https://nuki.io/wp-content/uploads/2018/04/20180330-Bridge-API-v1.7.pdf</a></p>
+    <p>
+      Zuerst muss die Bridge discovered und ein Auth-Token erzeugt und die ID des Nuki-Schlosses ermittelt werden,
+      wie in der API-Dokumentation beschrieben.
+      Die Nuki Bridge-API verwendet ausschließlich die Methode GET und alle Parameter werden in der URL übergeben.
+    </p>
+    <p>So könnte beispielhaft ein Web Request Baustein parametriert sein, um die Nuki Bridge API anzusteuern:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Input</th>
+          <th>Wert</th>
+          <th>Beschreibung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>URL</code></td>
+          <td>http://&#x3C;ip-der-nuki-bridge>:8080/lockAction?nukiId={NukiID}&#x26;token={NukiToken}&#x26;action={NukiLockAction}</td>
+          <td>I der URL werden Variablen verwendet, für die jeweils eigene Inputs erzeugt werden. Die NukiId entspricht der ID des Schlosses, das angesteuert werden soll und das NukiToken ist das Authentifizierungs-Token. Diese beiden Variablen sind eher selten veränderlich. Die NukiLockAction hingegen kann genutzt werden, um zwischen Auf- und Zuschließen zu unterscheiden. Diese kann als Input variabel gesetzt werden. Näheres dazu unten.</td>
+        </tr>
+        <tr>
+          <td><code>Methode</code></td>
+          <td>GET</td>
+          <td>Die Nuki Bridge API benutzt ausschließlich die Methode 'GET', weshalb man sie auch einfach im Browser testen kann.</td>
+        </tr>
+        <tr>
+          <td><code>NukiID</code></td>
+          <td>z.B. 1</td>
+          <td>Enthält die ID des Nuki-Schlosses, das angesteuert werden soll. Dies ist ein dynamischer Input, der sich aus dem Platzhalter in der URL ergeben hat.</td>
+        </tr>
+        <tr>
+          <td><code>NukiToken</code></td>
+          <td>Über die Nuki Bridge API zu ermitteln</td>
+          <td>Enthält den Authentifizierungs-Token der Nuki-Bridge. Dies ist ein dynamischer Input, der sich aus dem Platzhalter in der URL ergeben hat.</td>
+        </tr>
+        <tr>
+          <td><code>NukiLockAction</code></td>
+          <td>z.B. 1 = aufschließen, 2 = abschließen</td>
+          <td>Dies ist ein dynamischer Input, der sich aus dem Platzhalter in der URL ergeben hat. Siehe den Abschnitt "Lock Actions" in der Nuki Bridge API-Dokumentation.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      In diesem Beispiel werden drei Variablen in der URL verwendet. Zwei der Variablen sind eher statisch; die NukiID und das NukiToken. Diese können trotzdem aus einem Variablen-Datenpunkt gefüllt werden
+      (an dem Datenpunkt sollte unbedingt ein Vorgabewert und der Haken "Wert speichern" gesetzt werden!), damit sie bei Veränderungen in der Anlage auch ohne neue Inbetriebnahme verändert werden können.
+      Mit Hilfe des Gira S1 geht dies sogar sehr einfach Remote, da dieser auch einen Zugriff auf die Nuki Bridge erlaubt, um die neue Nuki ID oder das Token zu ermitteln.
+    </p>
+    <p>
+      Die dritte Variable, die NukiLockAction, ist hingegen dynamisch. Über sie wird angegeben, ob das Schloss ab- oder aufgeschlossen
+      werden soll.
+    </p>
+    <p>Damit nach dem Ändern der NukiLockAction der Web Request ausgeführt wird, ist es notwendig, den Trigger neu auszulösen.</p>
     <h1 id="hilfestellung"><a class="anchor" aria-hidden="true" tabindex="-1" href="#hilfestellung"><span class="octicon octicon-link"></span></a>Hilfestellung</h1>
     <p>Hilfe bei Fragen zu diesem Baustein erhalten Sie am besten über das KNX-User-Forum im Bereich <a href="https://knx-user-forum.de/forum/supportforen/gira-logik-sdk">Gira Logik SDK</a>. Ein Account im KNX-User-Forum kann kostenfrei erstellt werden.</p>
     <p>Erwähnen Sie @dalbuschat in Ihrem Posting, damit der Autor per E-Mail über Ihr Anliegen benachrichtigt wird. Da es sich um einen kostenfreien Baustein handelt, kann leider keine Gewährleistung gegeben werden, noch kann Support zugesagt werden.</p>
