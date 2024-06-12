@@ -35,7 +35,19 @@ die als Basis verwendet werden können.
 
 ## Einschränkungen
 
+### Keine TLS 1.2/1.3-Unterstützung
+
+Die auf dem X1 verwendete Mono-Version unterstützt leider nur TLS <= 1.1. Da diese TLS-Versionen als unsicher gelten und [offiziell deprecated wurden](https://datatracker.ietf.org/doc/html/rfc8996), erzwingen viele moderne Webserver heutzutage TLS >= 1.2. Mit diesen Webservern kann der WebRequest-Baustein daher leider nicht kommunizieren; im Simulator funktioniert es, aber auf dem X1 liefert der Baustein den Laufzeitfehler 998 Unknown error.
+
+Als Workaround kann man z. B. einen Proxy wie [php-proxy](https://github.com/zounar/php-proxy) auf einem eigenen Webserver betreiben, der per TLS <= 1.1 ansprechbar ist, und der die Anfragen dann an den gewünschten Zielserver weiterleitet.
+
+### Header
+
 Ein paar spezielle Header können in diesem Baustein nicht gesetzt werden (Range, Proxy-Connection, Expect, Transfer-Encoding).
+
+### DNS-TTL wird ignoriert
+
+Aus unbekannten Gründen (wahrscheinlich ebenfalls eine zu alte Mono-Version) scheint das .NET-Framework vom X1 DNS-Antworten unendlich lange zu cachen, egal welche TTL (Time to live) in der Antwort gesetzt war. Nur ein Neustart des X1 kann den Cache leeren. Das bedeutet in der Praxis, dass der WebRequest-Baustein keine Webseiten mit täglich wechselnden dynamischen IPs abrufen kann, da er die erste IP-Adresse des Servers unendlich lange cachen wird, diese aber nach einem Tag ungültig ist.
 
 ## Eingänge
 
